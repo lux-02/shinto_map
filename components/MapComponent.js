@@ -4,12 +4,12 @@ import {
   useLoadScript,
   MarkerClusterer,
   InfoWindow,
-  Marker,
+  MarkerF as Marker,
 } from "@react-google-maps/api";
 import styles from "./MapComponent.module.css";
 
 // 컴포넌트 외부에 libraries 배열을 상수로 정의
-const GOOGLE_MAPS_LIBRARIES = [];
+const GOOGLE_MAPS_LIBRARIES = ["places"];
 
 // 다크 테마 스타일 정의
 const darkThemeStyle = [
@@ -202,9 +202,11 @@ const MapComponent = ({
 
   const onLoad = useCallback(
     (map) => {
-      setMap(map);
-      if (onMapLoad) {
-        onMapLoad(map);
+      if (map) {
+        setMap(map);
+        if (onMapLoad) {
+          onMapLoad(map);
+        }
       }
     },
     [onMapLoad]
@@ -296,6 +298,9 @@ const MapComponent = ({
                     onClick={() => handleMarkerClick(shrine)}
                     clusterer={clusterer}
                     title={shrine.properties.name}
+                    options={{
+                      optimized: true,
+                    }}
                   />
                 );
               })}
