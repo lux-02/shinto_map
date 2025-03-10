@@ -131,3 +131,99 @@
   justify-content: center;
   background: #f5f5f5;
 }
+
+.placeDetails {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.photos {
+  margin-bottom: 16px;
+}
+
+.mainPhoto {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.address,
+.openingHours,
+.rating,
+.reviews,
+.website,
+.phone {
+  margin-bottom: 16px;
+}
+
+.address h4,
+.openingHours h4,
+.rating h4,
+.reviews h4,
+.website h4,
+.phone h4 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.openingHours ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.reviewList {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.review {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.review:last-child {
+  border-bottom: none;
+}
+
+.reviewText {
+  font-size: 0.8rem;
+  margin: 0 0 4px 0;
+  color: #333;
+}
+
+.reviewAuthor {
+  font-size: 0.7rem;
+  margin: 0;
+  color: #666;
+  font-style: italic;
+}
+
+.website a {
+  color: #1a73e8;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.website a:hover {
+  text-decoration: underline;
+}
+
+.placeError {
+  margin-top: 16px;
+  padding: 12px;
+  background-color: #fff3f3;
+  border-radius: 4px;
+  border: 1px solid #ffcdd2;
+}
+
+.placeErrorDetail {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 8px;
+}

@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>일본 신사 지도</title>
+        <title>Shinto Map</title>
         <meta
           name="description"
           content="일본의 신사 위치를 보여주는 지도 서비스"

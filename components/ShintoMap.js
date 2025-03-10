@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import styles from "./ShintoMap.module.css";
 import MapComponent from "./MapComponent";
@@ -12,6 +12,7 @@ const MapWithNoSSR = dynamic(() => import("./MapComponent"), {
 const ShintoMap = () => {
   const [shrineData, setShrineData] = useState([]);
   const [selectedShrine, setSelectedShrine] = useState(null);
+  const mapRef = useRef(null);
 
   useEffect(() => {
     const fetchShrineData = async () => {
@@ -23,13 +24,11 @@ const ShintoMap = () => {
         const processedData = data.features.map((feature) => {
           let center;
           if (feature.geometry.type === "Polygon") {
-            // Polygon의 첫 번째 좌표 배열의 중심점 계산
             const coords = feature.geometry.coordinates[0];
             const sumLat = coords.reduce((sum, coord) => sum + coord[1], 0);
             const sumLng = coords.reduce((sum, coord) => sum + coord[0], 0);
             center = [sumLat / coords.length, sumLng / coords.length];
           } else if (feature.geometry.type === "MultiPolygon") {
-            // MultiPolygon의 첫 번째 Polygon의 중심점 계산
             const coords = feature.geometry.coordinates[0][0];
             const sumLat = coords.reduce((sum, coord) => sum + coord[1], 0);
             const sumLng = coords.reduce((sum, coord) => sum + coord[0], 0);
@@ -51,12 +50,17 @@ const ShintoMap = () => {
     setSelectedShrine(shrine);
   };
 
+  const handleMapLoad = (map) => {
+    mapRef.current = map;
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.mapContainer}>
         <MapComponent
           onSelectShrine={handleShrineSelect}
           selectedShrine={selectedShrine}
+          onMapLoad={handleMapLoad}
         />
       </div>
 
@@ -71,6 +75,7 @@ const ShintoMap = () => {
                 {selectedShrine.properties["name:en"]}
               </h3>
             )}
+
             <div className={styles.coordinates}>
               <p>위치 정보</p>
               <div className={styles.coordinateValues}>
@@ -78,10 +83,17 @@ const ShintoMap = () => {
                 <span>경도: {selectedShrine.center[1].toFixed(6)}</span>
               </div>
             </div>
+
+            {selectedShrine.properties["addr:full"] && (
+              <div className={styles.address}>
+                <h4>주소</h4>
+                <p>{selectedShrine.properties["addr:full"]}</p>
+              </div>
+            )}
           </div>
         ) : (
           <div className={styles.noSelection}>
-            <p>지도에서 신사를 선택해주세요</p>
+            <p>Select a Shrine</p>
           </div>
         )}
       </div>

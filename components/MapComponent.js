@@ -3,20 +3,114 @@ import {
   GoogleMap,
   useLoadScript,
   MarkerClusterer,
-  Marker,
   InfoWindow,
+  Marker,
 } from "@react-google-maps/api";
 import styles from "./MapComponent.module.css";
 
-const MapComponent = ({ shrineData, onSelectShrine, selectedShrine }) => {
-  const { isLoaded } = useLoadScript({
+// 컴포넌트 외부에 libraries 배열을 상수로 정의
+const GOOGLE_MAPS_LIBRARIES = [];
+
+// 다크 테마 스타일 정의
+const darkThemeStyle = [
+  { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+  { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+  { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+  {
+    featureType: "administrative.locality",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#d59563" }],
+  },
+  {
+    featureType: "poi",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#d59563" }],
+  },
+  {
+    featureType: "poi.park",
+    elementType: "geometry",
+    stylers: [{ color: "#263c3f" }],
+  },
+  {
+    featureType: "poi.park",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#6b9a76" }],
+  },
+  {
+    featureType: "road",
+    elementType: "geometry",
+    stylers: [{ color: "#38414e" }],
+  },
+  {
+    featureType: "road",
+    elementType: "geometry.stroke",
+    stylers: [{ color: "#212a37" }],
+  },
+  {
+    featureType: "road",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#9ca5b3" }],
+  },
+  {
+    featureType: "road.highway",
+    elementType: "geometry",
+    stylers: [{ color: "#746855" }],
+  },
+  {
+    featureType: "road.highway",
+    elementType: "geometry.stroke",
+    stylers: [{ color: "#1f2835" }],
+  },
+  {
+    featureType: "road.highway",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#f3d19c" }],
+  },
+  {
+    featureType: "transit",
+    elementType: "geometry",
+    stylers: [{ color: "#2f3948" }],
+  },
+  {
+    featureType: "transit.station",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#d59563" }],
+  },
+  {
+    featureType: "water",
+    elementType: "geometry",
+    stylers: [{ color: "#17263c" }],
+  },
+  {
+    featureType: "water",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#515c6d" }],
+  },
+  {
+    featureType: "water",
+    elementType: "labels.text.stroke",
+    stylers: [{ color: "#17263c" }],
+  },
+];
+
+const MapComponent = ({
+  shrineData,
+  onSelectShrine,
+  selectedShrine,
+  onMapLoad,
+}) => {
+  const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: ["marker"],
+    libraries: GOOGLE_MAPS_LIBRARIES,
+    version: "weekly",
+    language: "ja",
+    region: "JP",
   });
 
   const [map, setMap] = useState(null);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [processedData, setProcessedData] = useState([]);
+  const markersRef = useRef({}); // 마커 참조 저장용
 
   useEffect(() => {
     const fetchShrineData = async () => {
@@ -106,9 +200,15 @@ const MapComponent = ({ shrineData, onSelectShrine, selectedShrine }) => {
     fetchShrineData();
   }, []);
 
-  const onLoad = useCallback((map) => {
-    setMap(map);
-  }, []);
+  const onLoad = useCallback(
+    (map) => {
+      setMap(map);
+      if (onMapLoad) {
+        onMapLoad(map);
+      }
+    },
+    [onMapLoad]
+  );
 
   const onUnmount = useCallback(() => {
     setMap(null);
@@ -146,6 +246,11 @@ const MapComponent = ({ shrineData, onSelectShrine, selectedShrine }) => {
     }
   }, [map, processedData, getMapBounds]);
 
+  if (loadError) {
+    console.error("Google Maps 로드 실패:", loadError);
+    return <div className={styles.error}>지도를 불러오는데 실패했습니다</div>;
+  }
+
   if (!isLoaded) {
     return <div className={styles.loading}>지도를 불러오는 중...</div>;
   }
@@ -163,6 +268,7 @@ const MapComponent = ({ shrineData, onSelectShrine, selectedShrine }) => {
           streetViewControl: false,
           mapTypeControl: false,
           fullscreenControl: false,
+          styles: darkThemeStyle,
         }}
       >
         <MarkerClusterer
@@ -183,14 +289,13 @@ const MapComponent = ({ shrineData, onSelectShrine, selectedShrine }) => {
                 }
                 const [lat, lng] = shrine.center;
 
-                console.log("Rendering marker at:", { lat, lng });
-
                 return (
                   <Marker
                     key={index}
                     position={{ lat, lng }}
                     onClick={() => handleMarkerClick(shrine)}
                     clusterer={clusterer}
+                    title={shrine.properties.name}
                   />
                 );
               })}
