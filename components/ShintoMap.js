@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import styles from "./ShintoMap.module.css";
 import MapComponent from "./MapComponent";
+import { useLanguage, languages } from "../contexts/LanguageContext";
+import LanguageSelector from "./LanguageSelector";
 
 // Leaflet 컴포넌트를 클라이언트 사이드에서만 로드
 const MapWithNoSSR = dynamic(() => import("./MapComponent"), {
@@ -10,6 +12,9 @@ const MapWithNoSSR = dynamic(() => import("./MapComponent"), {
 });
 
 const ShintoMap = () => {
+  const { currentLanguage } = useLanguage();
+  const t = languages[currentLanguage];
+
   const [shrineData, setShrineData] = useState([]);
   const [selectedShrine, setSelectedShrine] = useState(null);
   const [placeDetails, setPlaceDetails] = useState(null);
@@ -174,7 +179,7 @@ const ShintoMap = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-language={currentLanguage}>
       <div className={styles.mapContainer}>
         <MapComponent
           onSelectShrine={handleShrineSelect}
@@ -196,23 +201,27 @@ const ShintoMap = () => {
             )}
 
             <div className={styles.coordinates}>
-              <p>위치 정보</p>
+              <p>{t.location}</p>
               <div className={styles.coordinateValues}>
-                <span>위도: {selectedShrine.center[0].toFixed(6)}</span>
-                <span>경도: {selectedShrine.center[1].toFixed(6)}</span>
+                <span>
+                  {t.latitude}: {selectedShrine.center[0].toFixed(6)}
+                </span>
+                <span>
+                  {t.longitude}: {selectedShrine.center[1].toFixed(6)}
+                </span>
               </div>
             </div>
 
             {selectedShrine.properties["addr:full"] && (
               <div className={styles.address}>
-                <h4>주소</h4>
+                <h4>{t.address}</h4>
                 <p>{selectedShrine.properties["addr:full"]}</p>
               </div>
             )}
 
             {isLoading && (
               <div className={styles.loading}>
-                <p>상세 정보를 불러오는 중...</p>
+                <p>{t.loading}</p>
               </div>
             )}
 
@@ -236,17 +245,18 @@ const ShintoMap = () => {
 
                 {placeDetails.rating && (
                   <div className={styles.rating}>
-                    <h4>평점</h4>
+                    <h4>{t.rating}</h4>
                     <p>
                       ⭐ {placeDetails.rating} / 5.0 (
-                      {placeDetails.user_ratings_total}개의 평가)
+                      {placeDetails.user_ratings_total}
+                      {t.reviewCount})
                     </p>
                   </div>
                 )}
 
                 {placeDetails.opening_hours && (
                   <div className={styles.openingHours}>
-                    <h4>영업시간</h4>
+                    <h4>{t.openingHours}</h4>
                     <ul>
                       {placeDetails.opening_hours.weekday_text.map(
                         (hours, idx) => (
@@ -259,27 +269,27 @@ const ShintoMap = () => {
 
                 {placeDetails.website && (
                   <div className={styles.website}>
-                    <h4>웹사이트</h4>
+                    <h4>{t.website}</h4>
                     <a
                       href={placeDetails.website}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      방문하기
+                      {t.visitWebsite}
                     </a>
                   </div>
                 )}
 
                 {placeDetails.formatted_phone_number && (
                   <div className={styles.phone}>
-                    <h4>전화번호</h4>
+                    <h4>{t.phone}</h4>
                     <p>{placeDetails.formatted_phone_number}</p>
                   </div>
                 )}
 
                 {placeDetails.reviews && placeDetails.reviews.length > 0 && (
                   <div className={styles.reviews}>
-                    <h4>방문자 리뷰</h4>
+                    <h4>{t.reviews}</h4>
                     <div className={styles.reviewList}>
                       {placeDetails.reviews.slice(0, 3).map((review, idx) => (
                         <div key={idx} className={styles.review}>
@@ -298,10 +308,12 @@ const ShintoMap = () => {
           </div>
         ) : (
           <div className={styles.noSelection}>
-            <p>신사를 선택해주세요</p>
+            <p>{t.selectShrine}</p>
           </div>
         )}
       </div>
+
+      <LanguageSelector />
     </div>
   );
 };

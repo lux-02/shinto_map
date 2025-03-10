@@ -10,8 +10,19 @@ export default function Document() {
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        {/* 일본어 폰트 */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+        {/* 영어 폰트 */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+        {/* 한국어 폰트 */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
         <link

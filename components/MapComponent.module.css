@@ -28,16 +28,17 @@
 .popupTitle {
   font-weight: bold;
   margin-bottom: 4px;
+  color: #000;
 }
 
 .popupSubtitle {
   font-size: 0.875rem;
-  color: #666;
+  color: #000;
 }
 
 .popupCoordinates {
   font-size: 0.8rem;
-  color: #666;
+  color: #000;
   margin-top: 8px;
   font-family: monospace;
 }

@@ -1,0 +1,47 @@
+.languageSelector {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.select {
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  font-family: var(--font-ja);
+}
+
+.select:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.select:focus {
+  outline: none;
+  border-color: #4285f4;
+}
+
+@media (prefers-color-scheme: dark) {
+  .select {
+    background-color: #333;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+[data-language="ja"] .select {
+  font-family: var(--font-ja);
+}
+
+[data-language="en"] .select {
+  font-family: var(--font-en);
+}
+
+[data-language="ko"] .select {
+  font-family: var(--font-ko);
+}

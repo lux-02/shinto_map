@@ -22,6 +22,9 @@ body {
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-ja: "Noto Sans JP", sans-serif;
+  --font-en: "Outfit", sans-serif;
+  --font-ko: "Noto Sans KR", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -79,4 +82,41 @@ a {
 
 .marker-cluster-large div {
   background-color: rgba(241, 128, 23, 0.6);
+}
+
+/* 언어별 기본 폰트 설정 */
+[data-language="ja"] {
+  font-family: var(--font-ja);
+}
+
+[data-language="en"] {
+  font-family: var(--font-en);
+}
+
+[data-language="ko"] {
+  font-family: var(--font-ko);
+}
+
+/* 기본 폰트 크기 및 웨이트 조정 */
+[data-language="ja"] h1,
+[data-language="ja"] h2,
+[data-language="ja"] h3,
+[data-language="ja"] h4 {
+  font-weight: 700;
+}
+
+[data-language="en"] h1,
+[data-language="en"] h2,
+[data-language="en"] h3,
+[data-language="en"] h4 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+[data-language="ko"] h1,
+[data-language="ko"] h2,
+[data-language="ko"] h3,
+[data-language="ko"] h4 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
