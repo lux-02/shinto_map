@@ -1,0 +1,133 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.mapContainer {
+  flex: 1;
+  position: relative;
+}
+
+.sidebar {
+  width: 320px;
+  height: 100%;
+  overflow-y: auto;
+  background: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.sidebarTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #1a237e;
+}
+
+.shrineInfo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  padding: 16px;
+}
+
+.shrineInfoContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shrineTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.shrineSubtitle {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  font-weight: normal;
+}
+
+.coordinates {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+}
+
+.coordinates p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 0 4px 0;
+}
+
+.coordinateValues {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.shrineName {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #303f9f;
+}
+
+.shrineNameEn {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.shrineDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.shrineDetails span {
+  font-weight: 600;
+}
+
+.link {
+  color: #2196f3;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.shrineNote {
+  font-size: 0.875rem;
+  color: #666;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.noSelection {
+  text-align: center;
+  color: #666;
+  padding: 20px 0;
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+}
