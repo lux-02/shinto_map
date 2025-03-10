@@ -1,80 +1,56 @@
-# 신토 맵 (Shinto Map) 🗾
+# 신토 맵 (神社マップ / Shinto Map) 🏮
 
-일본의 신사 위치를 인터랙티브하게 탐색할 수 있는 웹 기반 지도 서비스입니다. 사용자들이 일본 전역의 신사들을 쉽게 찾고 관련 정보를 확인할 수 있도록 도와주는 플랫폼입니다.
+일본의 신사 위치와 상세 정보를 제공하는 인터랙티브 웹 서비스입니다. OpenStreetMap 데이터와 Google Places API를 활용하여 정확하고 풍부한 신사 정보를 제공합니다.
 
-## ✨ 주요 기능
+## 주요 기능 🌟
 
-- 🗺️ **인터랙티브 지도**
+### 1. 다국어 지원 🌏
 
-  - Google Maps API 기반의 사용자 친화적 인터페이스
-  - 부드러운 줌 인/아웃 기능
-  - 반응형 디자인으로 모든 디바이스 지원
+- 일본어(デフォルト), 영어, 한국어 인터페이스 제공
+- 각 언어에 최적화된 폰트 적용
 
-- 📍 **신사 정보 시각화**
+### 2. 지도 기능 🗺️
 
-  - 정확한 위치 마커 표시
-  - 마커 클러스터링으로 효율적인 정보 표시
-  - 선택한 신사의 상세 정보 사이드바 표시
+- 인터랙티브한 신사 위치 표시
+- 클러스터링을 통한 효율적인 마커 관리
+- 신사 선택 시 상세 정보 패널 표시
+- 반응형 디자인으로 모바일 환경 지원
 
-- 🎯 **상세 정보 제공**
+### 3. 신사 상세 정보 📍
+
+- 기본 정보
 
   - 신사 이름 (일본어/영어)
-  - 정확한 GPS 좌표
-  - 상세 주소 정보
-  - 신사 관련 부가 정보
+  - 정확한 위치 정보 (위도/경도)
+  - 상세 주소
 
-- 🌓 **테마 지원**
-  - 시스템 설정 기반 자동 다크 모드
-  - 사용자 환경에 최적화된 지도 스타일
+- Google Places API 연동 정보
+  - 대표 사진
+  - 평점 및 리뷰 수
+  - 영업 시간
+  - 웹사이트 링크
+  - 전화번호
+  - 방문자 리뷰 (최근 3개)
 
-## 🛠 기술 스택
+### 4. 사용자 인터페이스 💫
 
-### Frontend
+- 직관적인 신사 선택 및 정보 표시
+- 다크 모드 지원
+- 반응형 디자인
+  - 데스크톱: 우측 정보 패널
+  - 모바일: 하단 슬라이드업 패널
 
-- **Framework**: React.js, Next.js 15.2.1
-- **Maps**: @react-google-maps/api ^2.20.6
-- **Styling**: CSS Modules, Tailwind CSS
+## 기술 스택 🛠️
 
-### Development
+### 프론트엔드
 
-- **Language**: JavaScript
-- **Package Manager**: npm/yarn
-- **Code Quality**: ESLint
-- **Version Control**: Git
+- Next.js
+- React
+- Leaflet (지도 구현)
+- TailwindCSS (스타일링)
 
-## 📁 프로젝트 구조
+### API 및 데이터
 
-shinto_map/
-├── components/ # 리액트 컴포넌트
-│ ├── MapComponent.js # 구글 맵 컴포넌트
-│ └── ShintoMap.js # 메인 지도 컴포넌트
-├── pages/ # Next.js 페이지
-│ ├── app.js # 앱 설정
-│ ├── document.js # 문서 설정
-│ ├── index.js # 메인 페이지
-│ └── api/ # API 라우트
-├── styles/ # 스타일시트
-│ ├── globals.css # 전역 스타일
-│ └── .module.css # 컴포넌트별 스타일
-├── public/ # 정적 파일
-└── next.config.mjs # Next.js 설정
-
-## 📊 데이터 구조
-
-신사 데이터는 GeoJSON 형식으로 제공되며 다음 속성을 포함합니다:
-
-```javascript
-{
-  "type": "Feature",
-  "properties": {
-    "name": "神社名",           // 신사 이름 (일본어)
-    "name:en": "Shrine Name",  // 신사 이름 (영어)
-    "addr:full": "住所",       // 상세 주소
-    "type": "神社"            // 시설 유형
-  },
-  "geometry": {
-    "type": "Point",
-    "coordinates": [longitude, latitude]
-  }
-}
-```
+- OpenStreetMap (신사 위치 데이터)
+- Google Places API (상세 정보)
+- GeoJSON (데이터 포맷)
