@@ -55,3 +55,24 @@
   text-align: center;
   padding: 20px;
 }
+
+.dataStatus {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.statusItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

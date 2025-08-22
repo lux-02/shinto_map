@@ -18,6 +18,8 @@ export const languages = {
     loading: "読み込み中...",
     error: "エラーが発生しました",
     reviewCount: "件のレビュー",
+    shrineDataLoading: "神社データ読み込み中...",
+    totalShrinesCount: "総{count}個の神社が表示されます",
   },
   en: {
     selectShrine: "Select a Shrine",
@@ -34,6 +36,8 @@ export const languages = {
     loading: "Loading...",
     error: "An error occurred",
     reviewCount: "reviews",
+    shrineDataLoading: "Loading shrine data...",
+    totalShrinesCount: "Total {count} shrines displayed",
   },
   ko: {
     selectShrine: "신사를 선택해주세요",
@@ -50,6 +54,8 @@ export const languages = {
     loading: "로딩중...",
     error: "오류가 발생했습니다",
     reviewCount: "개의 평가",
+    shrineDataLoading: "신사 데이터 로딩 중...",
+    totalShrinesCount: "총 {count}개의 신사가 표시됩니다",
   },
 };
 
