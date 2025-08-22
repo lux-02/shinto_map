@@ -330,24 +330,39 @@ const MapComponent = ({
             styles: [
               {
                 textColor: "white",
-                url: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png",
-                height: 53,
-                width: 53,
-                textSize: 11,
-              },
-              {
-                textColor: "white",
-                url: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m2.png",
-                height: 56,
-                width: 56,
+                url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+                  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+                    <circle cx="25" cy="25" r="22" fill="#FF6B35" stroke="#ffffff" stroke-width="3"/>
+                  </svg>
+                `),
+                height: 50,
+                width: 50,
                 textSize: 12,
+                textColor: "white"
+              },
+              {
+                textColor: "white", 
+                url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+                  <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+                    <circle cx="30" cy="30" r="27" fill="#F7931E" stroke="#ffffff" stroke-width="3"/>
+                  </svg>
+                `),
+                height: 60,
+                width: 60,
+                textSize: 14,
+                textColor: "white"
               },
               {
                 textColor: "white",
-                url: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m3.png",
-                height: 66,
-                width: 66,
-                textSize: 13,
+                url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+                  <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70">
+                    <circle cx="35" cy="35" r="32" fill="#C1272D" stroke="#ffffff" stroke-width="3"/>
+                  </svg>
+                `),
+                height: 70,
+                width: 70,
+                textSize: 16,
+                textColor: "white"
               },
             ],
           }}
