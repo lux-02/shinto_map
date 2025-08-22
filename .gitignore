@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# large screenshot files
+public/screenshots/*.gif
+public/screenshots/*.mp4
+
 # debug
 npm-debug.log*
 yarn-debug.log*
